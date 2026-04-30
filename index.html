@@ -639,6 +639,73 @@
       to { transform: translateX(-50%); }
     }
 
+/* Testimonials Section */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124,111,255,0.4);
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.2;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .testimonial-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 1.1rem;
+    }
+    .testimonial-info h4 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    .testimonial-info span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
     /* CV Section - improved */
     .cv-section {
       background: linear-gradient(135deg, var(--bg2), var(--bg3));
@@ -718,11 +785,33 @@
       font-size: 0.95rem;
       transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
     }
-    .form-input:focus {
+.form-input:focus {
       outline: none;
       border-color: var(--accent);
       background: var(--bg3);
       box-shadow: 0 0 0 4px rgba(124,111,255,0.15);
+    }
+
+    /* Form Status Messages */
+.form-status {
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+.form-status.success {
+      display: block;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid #10b981;
+      color: #10b981;
+    }
+    .form-status.error {
+      display: block;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid #ef4444;
+      color: #ef4444;
     }
 
     .social-icon {
@@ -1121,49 +1210,56 @@
             </a>
           </div>
         </div>
-        <div class="reveal" style="transition-delay: 0.15s;">
-          <h3 style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1.5rem;">Habilidades Técnicas</h3>
-          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem;">
-            <span class="tech-tag">Desarrollo Full Stack</span>
-            <span class="tech-tag">Diseño de Arquitecturas</span>
-            <span class="tech-tag">Gestión de Datos</span>
-            <span class="tech-tag">Desarrollo Móvil</span>
-            <span class="tech-tag">Metodología Scrum</span>
-            <span class="tech-tag">Seguridad</span>
-          </div>
-          <h3 style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1.5rem;">Tecnologías que Domino</h3>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="stack-pill">
-              <i class="fab fa-js" style="color: #f7df1e; font-size: 1.5rem;"></i>
-              <span>JavaScript / TypeScript</span>
+<div class="reveal" style="transition-delay: 0.15s;">
+          <!-- Tech Sidebar -->
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #f7df1e; font-size: 1.5rem;"><i class="fab fa-js"></i></span>
+              <span class="tech-tag" style="background: rgba(247,223,30,0.15); border-color: #f7df1e;">JavaScript</span>
+              <span class="tech-tag" style="background: rgba(49,120,198,0.15); border-color: #3178c6;">TypeScript</span>
+              <span class="tech-tag" style="background: rgba(248,152,30,0.15); border-color: #f8981e;">Java</span>
+              <span class="tech-tag" style="background: rgba(55,118,58,0.15); border-color: #37763a;">Python</span>
             </div>
-            <div class="stack-pill">
-              <i class="fab fa-java" style="color: #f8981e; font-size: 1.5rem;"></i>
-              <span>Java / Python</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #3c873a; font-size: 1.5rem;"><i class="fab fa-node"></i></span>
+              <span class="tech-tag" style="background: rgba(60,135,58,0.15); border-color: #3c873a;">Node.js</span>
+              <span class="tech-tag" style="background: rgba(56,189,248,0.15); border-color: #38bdf8;">React</span>
+              <span class="tech-tag" style="background: rgba(124,111,255,0.15); border-color: #7c6fff;">Next.js</span>
+              <span class="tech-tag" style="background: rgba(0,0,0,0.3); border-color: #000;">Expo</span>
             </div>
-            <div class="stack-pill">
-              <i class="fab fa-react" style="color: var(--accent3); font-size: 1.5rem;"></i>
-              <span>React / Next.js</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #6db33f; font-size: 1.5rem;"><i class="fas fa-leaf"></i></span>
+              <span class="tech-tag" style="background: rgba(109,179,63,0.15); border-color: #6db33f;">Spring Boot</span>
+              <span class="tech-tag" style="background: rgba(36,41,46,0.3); border-color: #242424;">FastAPI</span>
             </div>
-            <div class="stack-pill">
-              <i class="fab fa-node" style="color: #3c873a; font-size: 1.5rem;"></i>
-              <span>Node.js / Express</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #e34f26; font-size: 1.5rem;"><i class="fab fa-html5"></i></span>
+              <span style="color: #264de4; font-size: 1.5rem;"><i class="fab fa-css3-alt"></i></span>
+              <span style="color: #06b6d4; font-size: 1.5rem;"><i class="fab fa-tailwind"></i></span>
+              <span class="tech-tag" style="background: rgba(227,79,38,0.15); border-color: #e34f26;">HTML5</span>
+              <span class="tech-tag" style="background: rgba(38,77,228,0.15); border-color: #264de4;">CSS3</span>
+              <span class="tech-tag" style="background: rgba(6,182,212,0.15); border-color: #06b6d4;">Tailwind</span>
             </div>
-            <div class="stack-pill">
-              <i class="fas fa-database" style="color: var(--accent2); font-size: 1.5rem;"></i>
-              <span>PostgreSQL / MySQL</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #336791; font-size: 1.5rem;"><i class="fas fa-database"></i></span>
+              <span class="tech-tag" style="background: rgba(51,103,145,0.15); border-color: #336791;">PostgreSQL</span>
+              <span class="tech-tag" style="background: rgba(0,117,143,0.15); border-color: #00758f;">MySQL</span>
+              <span class="tech-tag" style="background: rgba(0,247,76,0.15); border-color: #00f74c;">MongoDB</span>
             </div>
-            <div class="stack-pill">
-              <i class="fas fa-cloud" style="color: #2496ed; font-size: 1.5rem;"></i>
-              <span>Supabase / Neon</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #10b981; font-size: 1.5rem;"><i class="fas fa-server"></i></span>
+              <span class="tech-tag" style="background: rgba(16,185,129,0.15); border-color: #10b981;">Prisma</span>
+              <span class="tech-tag" style="background: rgba(60,205,136,0.15); border-color: #3cc974;">Supabase</span>
+              <span class="tech-tag" style="background: rgba(0,234,153,0.15); border-color: #00ea99;">Neon</span>
+              <span class="tech-tag" style="background: rgba(0,0,0,0.3); border-color: #242424;">Vercel</span>
             </div>
-            <div class="stack-pill">
-              <i class="fab fa-mobile-alt" style="color: var(--accent); font-size: 1.5rem;"></i>
-              <span>React Native</span>
-            </div>
-            <div class="stack-pill">
-              <i class="fab fa-git-alt" style="color: #f05032; font-size: 1.5rem;"></i>
-              <span>Git / GitHub</span>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+              <span style="color: #f05032; font-size: 1.5rem;"><i class="fab fa-git-alt"></i></span>
+              <span class="tech-tag" style="background: rgba(240,80,50,0.15); border-color: #f05032;">Git</span>
+              <span class="tech-tag" style="background: rgba(36,41,46,0.3); border-color: #242424;">GitHub</span>
+              <span class="tech-tag" style="background: rgba(255,124,30,0.15); border-color: #ff7c1e;">Postman</span>
+              <span class="tech-tag" style="background: rgba(237,46,46,0.15); border-color: #ed2e2e;">Figma</span>
+              <span class="tech-tag" style="background: rgba(249,211,66,0.15); border-color: #f9d342;">Jira</span>
             </div>
           </div>
         </div>
@@ -1198,7 +1294,7 @@
     </div>
   </section>
 
-  <!-- Habilidades -->
+<!-- Habilidades -->
   <section id="habilidades">
     <div class="container">
       <div class="section-header reveal">
@@ -1207,24 +1303,34 @@
       </div>
       <div class="skills-grid">
         <div class="skill-card reveal tilt">
-          <i class="fab fa-react"></i>
-          <h3>Frontend</h3>
-          <p>React, Next.js, Tailwind CSS, JavaScript ES6+</p>
+          <i class="fab fa-js"></i>
+          <h3>JavaScript / TypeScript</h3>
+          <p>Desarrollo frontend y backend con JS moderno, TypeScript para tipado estático</p>
         </div>
         <div class="skill-card reveal tilt" style="transition-delay: 0.1s;">
-          <i class="fas fa-server"></i>
-          <h3>Backend</h3>
-          <p>Node.js, Express, Java Spring Boot, REST APIs</p>
+          <i class="fab fa-node"></i>
+          <h3>Node.js / Express</h3>
+          <p>APIs REST escalables con Node.js y Express, arquitecturas backend</p>
         </div>
         <div class="skill-card reveal tilt" style="transition-delay: 0.2s;">
-          <i class="fas fa-database"></i>
-          <h3>Bases de Datos</h3>
-          <p>Supabase, Neon PostgreSQL, Prisma ORM</p>
+          <i class="fab fa-react"></i>
+          <h3>React / Next.js</h3>
+          <p>Interfaces reactivas, SSR, SSG y aplicaciones full-stack con Next.js</p>
         </div>
         <div class="skill-card reveal tilt" style="transition-delay: 0.3s;">
-          <i class="fas fa-cogs"></i>
-          <h3>DevOps</h3>
-          <p>Docker, Vercel, Git/GitHub, CI/CD</p>
+          <i class="fas fa-database"></i>
+          <h3>PostgreSQL / MySQL</h3>
+          <p>Diseño y gestión de bases de datos relacionales, consultas optimizadas</p>
+        </div>
+<div class="skill-card reveal tilt" style="transition-delay: 0.4s;">
+          <i class="fas fa-cloud"></i>
+          <h3>Supabase / Neon</h3>
+          <p>BaaS con Supabase, bases de datos serverless en Neon PostgreSQL</p>
+        </div>
+        <div class="skill-card reveal tilt" style="transition-delay: 0.5s;">
+          <i class="fab fa-git-alt"></i>
+          <h3>Git / GitHub</h3>
+          <p>Control de versiones, colaboración en equipo y CI/CD</p>
         </div>
       </div>
     </div>
@@ -1318,6 +1424,48 @@
     </div>
   </section>
 
+<!-- Testimonios -->
+  <section id="testimonios">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">// Opiniones</div>
+        <h2>Lo que dicen mis clientes</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <p class="testimonial-text">Excelente trabajo. El proyecto quedó exactamente como lo imaginamos. Comunicación fluida y entrega puntual. ¡Totalmente recomendado!</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JC</div>
+            <div class="testimonial-info">
+              <h4>Jhostin Castillo</h4>
+              <span>Cliente GestEmp</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+          <p class="testimonial-text">Muy profesional, entiende perfectamente las necesidades del cliente. El sistema de inventario que nos desarrolló facilitó mucho nuestro trabajo diario.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">YA</div>
+            <div class="testimonial-info">
+              <h4>Yuceth Alfaro</h4>
+              <span>Cliente Inmobiliaria</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+          <p class="testimonial-text">Gran atención al detalle y código muy limpio. La aplicación web quedó perfecta y funciona sin problemas.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AJ</div>
+            <div class="testimonial-info">
+              <h4>Ana Jaspe</h4>
+              <span>Cliente E-commerce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CV Section -->
   <section class="cv-section reveal">
     <div class="container">
@@ -1365,10 +1513,14 @@
               <a href="mailto:yesidcordero1@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
             </div>
           </div>
-          <form style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <input type="text" placeholder="Nombre" class="form-input">
-            <input type="email" placeholder="Email" class="form-input">
-            <textarea placeholder="Tu mensaje" rows="4" class="form-input" style="resize: vertical;"></textarea>
+<form id="contactForm" style="display: flex; flex-direction: column; gap: 1.5rem;" onsubmit="handleSubmit(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <input type="text" id="contactName" placeholder="Nombre" class="form-input" required>
+              <input type="text" id="contactApellido" placeholder="Apellido" class="form-input" required>
+            </div>
+            <input type="email" id="contactEmail" placeholder="Tu correo electrónico" class="form-input" required>
+            <textarea id="contactMensaje" placeholder="Descripción del trabajo o proyecto..." rows="4" class="form-input" style="resize: vertical;" required></textarea>
+            <div id="formStatus" class="form-status"></div>
             <button type="submit" class="btn btn-primary" style="width: fit-content; align-self: flex-end;">
               Enviar <i class="fas fa-paper-plane"></i>
             </button>
@@ -1395,6 +1547,16 @@
   <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
     <i class="fas fa-arrow-up"></i>
   </button>
+
+<!-- Cargar script de envío de correos -->
+  <script src="./api/send.js"></script>
+  
+  <!-- Configuración de API Key de Brevo (definida directamente para pruebas) -->
+  <script>
+    // REEMPLAZA ESTO CON TU API KEY REAL DE BREVO
+    // La API Key se obtiene en: https://app.brevo.com/settings/keys/smtp
+window.BREVO_API_KEY = 'TU_API_KEY_AQUI';
+  </script>
 
   <script>
     const projects = {
