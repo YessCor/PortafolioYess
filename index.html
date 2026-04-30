@@ -27,7 +27,7 @@
 
     html { scroll-behavior: smooth; }
 
-    body {
+body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
@@ -55,13 +55,13 @@
       background: rgba(10,10,15,0.85);
       border-bottom: 1px solid var(--border);
     }
-    .nav-inner {
+.nav-inner {
       max-width: 1100px;
       margin: 0 auto;
       padding: 1rem 2rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
     }
     .logo {
       font-family: var(--font-head);
@@ -293,7 +293,7 @@
       margin: 4rem 0;
     }
 
-    /* Modal */
+/* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -303,39 +303,109 @@
       backdrop-filter: blur(20px);
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1rem;
     }
     .modal.active { display: flex; }
-    .modal-content {
+.modal-content {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      max-width: 600px;
+      border-radius: 16px;
       width: 100%;
-      max-height: 80vh;
+      max-width: 600px;
+      max-height: 90vh;
       overflow-y: auto;
-      padding: 2.5rem;
+      overflow-x: hidden;
+      padding: 2rem;
+      margin: auto;
+      box-sizing: border-box;
     }
     .close-modal {
       position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      font-size: 2rem;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.8rem;
       color: var(--muted);
       cursor: pointer;
+      z-index: 10;
     }
+    #modalTitle { font-size: 1.5rem; }
+    #modalImage { font-size: 3rem; margin-bottom: 1rem; }
+    #modalDescription { font-size: 1rem; line-height: 1.6; }
+    #modalDemo { font-size: 0.9rem; padding: 0.7rem 1.5rem; }
 
 /* Responsive */
     @media (max-width: 768px) {
-      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      body { overflow-x: visible; max-width: 100vw; }
+      nav { position: fixed; overflow: visible; width: 100%; max-width: 100%; left: 0; right: 0; }
+      .nav-inner { padding: 0.8rem 1rem; justify-content: center; max-width: 100%; width: 100%; display: flex !important; }
+      .logo { font-size: 1.2rem !important; display: block; text-align: center; width: 100%; margin: 0 auto; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; padding: 0 1rem; }
+      .hero-desc { margin: 0 auto 2rem; }
       .projects-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
-      nav .nav-links { display: none; }
       #sobremi > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
       #sobremi h3 { text-align: center; }
-      #sobremi .fade-in-up:first-child { text-align: center; }
-      #sobremi .fade-in-up:first-child div { justify-content: center; }
-      #sobremi .fade-in-up:last-child { text-align: center; }
+      #sobremi > div > div:first-child > div:last-child > div { display: flex !important; flex-wrap: wrap !important; justify-content: center; padding: 0.5rem; }
+      #sobremi > div > div:first-child > div:last-child > div > div { grid-template-columns: 1fr 1fr !important; width: 100%; }
+      #sobremi > div > div:first-child > div:last-child > div > div > span { font-size: 0.7rem; padding: 0.4rem 0.6rem; white-space: nowrap; }
+      .hero-tag { white-space: nowrap; font-size: 0.7rem; }
+      #contacto > div > div > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .project-img { height: 180px; }
+      .cv-section { padding: 2rem 1rem; margin: 2rem 0; }
+      .cv-section h2 { font-size: 1.8rem !important; }
+      #inicio { padding: 5rem 0 3rem; }
+      section { padding: 3rem 0; }
+      h1 { font-size: 2rem !important; }
+      h2 { font-size: 1.5rem !important; }
+      .hero-grid > div:last-child > div:first-child { width: 200px !important; height: 200px !important; }
+      .section-header { margin-bottom: 2rem; }
+      .github-cta { margin-top: 2rem; padding: 1rem; }
+      .modal-content { width: 95% !important; max-width: 95% !important; padding: 1.5rem; margin: 0.5rem; }
+      .modal-content h2 { font-size: 1.5rem; }
+      .modal-content p { font-size: 0.95rem; line-height: 1.5; }
+      .modal-content .btn { padding: 0.7rem 1.5rem; font-size: 0.9rem; }
+    }
+
+/* Desktop modal sizing */
+    @media (min-width: 769px) {
+      .modal-content { 
+        width: 90% !important; 
+        max-width: 650px !important; 
+        padding: 2rem !important; 
+        margin: auto !important; 
+      }
+      #modalTitle { font-size: 1.8rem !important; }
+      #modalDescription { font-size: 1rem !important; line-height: 1.7 !important; }
+      #modalImage { font-size: 4rem !important; }
+    }
+
+    /* Modal responsive small */
+    @media (max-width: 480px) {
+      .modal-content { width: 98% !important; max-width: 98% !important; padding: 1rem; margin: 0.5rem auto; }
+      #modalTitle { font-size: 1.3rem !important; }
+      #modalDescription { font-size: 0.9rem !important; }
+      #modalImage { font-size: 2.5rem !important; }
+    }
+    
+    /* Desktop large screens */
+    @media (min-width: 1100px) {
+      .modal-content { max-width: 750px !important; }
+    }
+
+    /* Mobile nav fix */
+    @media (max-width: 480px) {
+      .nav-inner { padding: 0.6rem 0.5rem !important; }
+      .logo { font-size: 1rem !important; }
+    }
+
+    /* Show all content properly on desktop */
+    @media (min-width: 769px) {
+      #sobremi > div > div:first-child > div:last-child > div > div { 
+        display: flex !important; 
+      }
+      #sobremi > div > div:first-child > div:last-child > div > div > span {
+        display: inline-block !important;
+      }
     }
 
     /* GitHub Button Animation */
@@ -390,10 +460,9 @@
 </head>
 <body>
 <!-- Navigation -->
-  <nav>
+<nav>
     <div class="nav-inner">
-      <a href="#inicio" class="logo">Yess<span>Cor</span></a>
-      <a href="public/Yessid_Cordero.pdf" class="btn btn-primary" target="_blank">Hoja de Vida</a>
+      <a href="#inicio" class="logo" style="margin: 0 auto; text-align: center;">Yess<span>Cor</span></a>
     </div>
   </nav>
 
