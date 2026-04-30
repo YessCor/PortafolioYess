@@ -179,18 +179,32 @@
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
-    .skill-card {
+.skill-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2.5rem;
       text-align: center;
-      transition: all 0.3s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
     }
     .skill-card:hover {
-      border-color: rgba(124,111,255,0.4);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-color: rgba(124,111,255,0.5);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 20px rgba(124,111,255,0.15);
+    }
+    .skill-card:hover::before {
+      transform: scaleX(1);
     }
     .skill-card i {
       font-size: 3rem;
@@ -207,17 +221,36 @@
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
     }
-    .project-card {
+.project-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124,111,255,0.1), rgba(56,189,248,0.05));
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 2;
     }
     .project-card:hover {
-      border-color: rgba(124,111,255,0.4);
-      transform: translateY(-8px);
+      border-color: rgba(124,111,255,0.6);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(124,111,255,0.2), 0 0 0 1px rgba(124,111,255,0.3);
+    }
+    .project-card:hover::before {
+      opacity: 1;
+    }
+    .project-card:active {
+      transform: translateY(-5px) scale(0.99);
+      transition: all 0.15s;
     }
     .project-img {
       height: 200px;
@@ -292,12 +325,17 @@
       cursor: pointer;
     }
 
-    /* Responsive */
+/* Responsive */
     @media (max-width: 768px) {
       .hero-grid { grid-template-columns: 1fr; text-align: center; }
       .projects-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       nav .nav-links { display: none; }
+      #sobremi > div > div:first-child { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      #sobremi h3 { text-align: center; }
+      #sobremi .fade-in-up:first-child { text-align: center; }
+      #sobremi .fade-in-up:first-child div { justify-content: center; }
+      #sobremi .fade-in-up:last-child { text-align: center; }
     }
 
     /* GitHub Button Animation */
@@ -351,11 +389,11 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
+<!-- Navigation -->
   <nav>
     <div class="nav-inner">
       <a href="#inicio" class="logo">Yess<span>Cor</span></a>
-      <a href="#habilidades" class="btn btn-primary">Habilidades</a>
+      <a href="public/Yessid_Cordero.pdf" class="btn btn-primary" target="_blank">Hoja de Vida</a>
     </div>
   </nav>
 
@@ -381,18 +419,93 @@
           </a>
         </div>
       </div>
-      <div style="text-align: center;">
-        <div style="width: 300px; height: 300px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent3)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 800; color: white; border: 1px solid var(--border);">
-          YC
+<div style="text-align: center;">
+        <div style="width: 300px; height: 300px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent3)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 800; color: white; border: 1px solid var(--border); overflow: hidden;">
+          <img src="./images/FotoYess.jpeg" alt="Yessid Cordero" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.5rem; margin: 0 auto; max-width: 280px;">
           <div style="font-weight: 700; color: var(--accent2);">⚡ Full Stack Junior</div>
         </div>
       </div>
     </div>
+</section>
+
+<!-- Sobre Mí -->
+  <section id="sobremi">
+    <div class="container">
+      <div class="section-header fade-in-up">
+        <div class="section-label">// Sobre Mí</div>
+        <h2>Conoce más sobre mí</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+        <div class="fade-in-up">
+          <h3 style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1.5rem;">Descripción Profesional</h3>
+          <p style="color: var(--muted); margin-bottom: 1.5rem;">
+            Soy un Desarrollador Full Stack Junior especializado en crear soluciones escalables y de alto rendimiento. Mi enfoque principal es el Backend, donde diseño arquitecturas robustas con Node.js y Java, integrando bases de datos modernas como Neon y Supabase.
+          </p>
+          <p style="color: var(--muted); margin-bottom: 1.5rem;">
+            Complemento mi perfil con el desarrollo de interfaces fluidas y responsivas en React y Next.js, garantizando una experiencia de usuario impecable en cada capa del producto. Me apasiona entender el sistema completo —desde el dato hasta el cliente final— para entregar software de calidad con impacto real.
+          </p>
+          <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <a href="public/Yessid_Cordero.pdf" class="btn btn-primary" download>
+              <i class="fas fa-download"></i> Descargar CV
+            </a>
+            <a href="#portafolio" class="btn" style="background: transparent; border: 1px solid var(--border); color: var(--text);">
+              Ver Proyectos
+            </a>
+          </div>
+        </div>
+        <div class="fade-in-up" style="animation-delay: 0.2s;">
+          <h3 style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1.5rem;">Habilidades Técnicas</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem;">
+            <span style="background: rgba(124,111,255,0.15); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;">Desarrollo Full Stack</span>
+            <span style="background: rgba(124,111,255,0.15); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;">Diseño de Arquitecturas</span>
+            <span style="background: rgba(124,111,255,0.15); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;">Gestión de Datos</span>
+            <span style="background: rgba(124,111,255,0.15); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;">Desarrollo Móvil</span>
+            <span style="background: rgba(124,111,255,0.15); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;">Metodología Scrum</span>
+            <span style="background: rgba(124,111,255,0.15); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;">Seguridad</span>
+          </div>
+          <h3 style="font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1.5rem;">Tecnologías que Domino</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-js" style="color: #f7df1e; font-size: 1.5rem;"></i>
+              <span>JavaScript / TypeScript</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-java" style="color: #f8981e; font-size: 1.5rem;"></i>
+              <span>Java / Python</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-react" style="color: var(--accent3); font-size: 1.5rem;"></i>
+              <span>React / Next.js</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-node" style="color: #3c873a; font-size: 1.5rem;"></i>
+              <span>Node.js / Express</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fas fa-database" style="color: var(--accent2); font-size: 1.5rem;"></i>
+              <span>PostgreSQL / MySQL</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fas fa-cloud" style="color: #2496ed; font-size: 1.5rem;"></i>
+              <span>Supabase / Neon</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-mobile-alt" style="color: var(--accent); font-size: 1.5rem;"></i>
+              <span>React Native</span>
+            </div>
+            <div style="background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+              <i class="fab fa-git-alt" style="color: #f05032; font-size: 1.5rem;"></i>
+              <span>Git / GitHub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-<!-- Servicios -->
+  <!-- Servicios -->
   <section id="servicios">
     <div class="container">
       <div class="section-header fade-in-up">
