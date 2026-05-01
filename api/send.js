@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   const apiKey = process.env.BREVO_API_KEY;
 
   if (!apiKey) {
-    console.error('BREVO_API_KEY no está configurada en las variables de entorno de Vercel');
+    console.error('BREVO_API_KEY missing - Check Vercel dashboard Environment Variables');
     return res.status(500).json({ message: 'Error de configuración del servidor. Contacta al administrador.' });
   }
 
@@ -102,13 +102,13 @@ export default async function handler(req, res) {
     }
 
     if (!response.ok) {
-      console.error('Error de Brevo al enviar:', result);
+      console.error('Vercel BREVO API error:', result);
       return res.status(response.status).json({ message: result?.message || 'Error del proveedor de correo al enviar el mensaje.' });
     }
 
     return res.status(200).json({ success: true, message: 'Mensaje procesado correctamente por el servidor.' });
   } catch (error) {
-    console.error('Error de fetch para conectar con Brevo:', error);
+    console.error('Vercel function error - Brevo connection failed:', error);
     return res.status(500).json({ message: 'Error de red en el servidor. Por favor verifica más tarde.' });
   }
 }
