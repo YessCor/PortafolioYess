@@ -1548,14 +1548,71 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
-<!-- Cargar script de envío de correos -->
-  <script src="./api/send.js"></script>
-  
-  <!-- Configuración de API Key de Brevo (definida directamente para pruebas) -->
+  <!-- Scripts de Vercel/Contacto -->
   <script>
-    // REEMPLAZA ESTO CON TU API KEY REAL DE BREVO
-    // La API Key se obtiene en: https://app.brevo.com/settings/keys/smtp
-window.BREVO_API_KEY = 'TU_API_KEY_AQUI';
+    async function sendEmail(datos) {
+      try {
+        const response = await fetch('/api/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok) {
+          return { success: false, message: result.message || 'Error al enviar el mensaje.' };
+        }
+        
+        return { success: true, message: '¡Mensaje enviado correctamente! Te contactaré pronto.' };
+      } catch (error) {
+        console.error('Error:', error);
+        return { success: false, message: 'Error de conexión. Por favor verifica tu conexión a internet.' };
+      }
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const statusMessage = document.getElementById('formStatus');
+      
+      const datos = {
+        nombre: form.querySelector('#contactName')?.value?.trim() || '',
+        apellido: form.querySelector('#contactApellido')?.value?.trim() || '',
+        email: form.querySelector('#contactEmail')?.value?.trim() || '',
+        descripcion: form.querySelector('#contactMensaje')?.value?.trim() || ''
+      };
+      
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+      
+      if (statusMessage) {
+        statusMessage.className = '';
+        statusMessage.textContent = '';
+      }
+      
+      const resultado = await sendEmail(datos);
+      
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      
+      if (statusMessage) {
+        if (resultado.success) {
+          statusMessage.className = 'form-status success';
+          statusMessage.textContent = resultado.message;
+          form.reset();
+        } else {
+          statusMessage.className = 'form-status error';
+          statusMessage.textContent = resultado.message;
+        }
+      }
+      return resultado;
+    }
+    
+    window.handleSubmit = handleSubmit;
   </script>
 
   <script>
