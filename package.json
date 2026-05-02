@@ -1,8 +1,11 @@
 {
   "name": "Portafolio",
   "version": "1.0.0",
-{"node": ">=20.0.0"},
-  "scripts":
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
     "dev": "vercel dev"
   },
   "dependencies": {}
