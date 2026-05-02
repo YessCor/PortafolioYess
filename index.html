@@ -3,8 +3,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yessid Cordero | Full Stack Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yessid Cordero - Desarrollador Full Stack Junior especializado en Node.js, React, Java y bases de datos Supabase/Neon. Desarrollo soluciones escalables y modernas.">
+  <meta name="keywords" content="desarrollador full stack, node.js, react, next.js, java, supabase, postgresql, portafolio, sena">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yessid Cordero | Desarrollador Full Stack">
+  <meta property="og:description" content="Especialista en Node.js, React, Java y Supabase. Desarrollo soluciones web escalables y modernas para empresas innovadoras.">
+  <meta property="og:image" content="https://your-vercel-domain.vercel.app/images/FotoYess.jpeg">
+  <meta property="og:url" content="https://your-vercel-domain.vercel.app">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yessid Cordero | Desarrollador Full Stack">
+  <meta name="twitter:description" content="Especialista en Node.js, React, Java y Supabase. Desarrollo soluciones web escalables.">
+  <meta name="twitter:image" content="https://your-vercel-domain.vercel.app/images/FotoYess.jpeg">
+  <!-- PWA / Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <meta name="theme-color" content="#7c6fff">
+  <meta name="msapplication-TileColor" content="#7c6fff">
+  <!-- Preconnect CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+<title>Yessid Cordero | Desarrollador Full Stack | Node.js React Java Supabase</title>
+</xai:function_call.
+
+<xai:function_call name="edit_file">
+<parameter name="path">c:/Users/yesid/Desktop/Yessid/PERSONAL/Portafolio/index.html
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -1134,7 +1163,7 @@
       <div class="fade-in-up" style="text-align: center; animation-delay: 0.15s;">
         <div class="profile-wrap">
           <div class="profile-img">
-            <img src="images/FotoYess.jpeg" alt="Yessid Cordero">
+<img src="images/FotoYess.jpeg" alt="Foto profesional de Yessid Cordero, Desarrollador Full Stack Junior especializado en Node.js React Java" loading="lazy">
           </div>
           <div class="floating-badge badge-top"><i class="fas fa-bolt"></i> Backend</div>
           <div class="floating-badge badge-bottom"><i class="fas fa-rocket"></i> Frontend</div>
@@ -1602,19 +1631,63 @@
       }
     }
 
-    async function handleSubmit(event) {
+async function handleSubmit(event) {
       event.preventDefault();
       
+      // Enhanced client-side validation
       const form = event.target;
-      const submitBtn = form.querySelector('button[type="submit"]');
+      const name = form.querySelector('#contactName');
+      const apellido = form.querySelector('#contactApellido');
+      const email = form.querySelector('#contactEmail');
+      const mensaje = form.querySelector('#contactMensaje');
       const statusMessage = document.getElementById('formStatus');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      
+      // Trim and validate
+      const nameVal = name.value.trim();
+      const apellidoVal = apellido.value.trim();
+      const emailVal = email.value.trim();
+      const mensajeVal = mensaje.value.trim();
+      
+      if (!nameVal) {
+        showStatus('Por favor ingresa tu nombre', 'error');
+        name.focus();
+        return;
+      }
+      if (!apellidoVal) {
+        showStatus('Por favor ingresa tu apellido', 'error');
+        apellido.focus();
+        return;
+      }
+      if (!emailVal) {
+        showStatus('Por favor ingresa tu email', 'error');
+        email.focus();
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        showStatus('Por favor ingresa un email válido', 'error');
+        email.focus();
+        return;
+      }
+      if (!mensajeVal || mensajeVal.length < 10) {
+        showStatus('El mensaje debe tener al menos 10 caracteres', 'error');
+        mensaje.focus();
+        return;
+      }
       
       const datos = {
-        nombre: form.querySelector('#contactName')?.value?.trim() || '',
-        apellido: form.querySelector('#contactApellido')?.value?.trim() || '',
-        email: form.querySelector('#contactEmail')?.value?.trim() || '',
-        descripcion: form.querySelector('#contactMensaje')?.value?.trim() || ''
+        nombre: nameVal,
+        apellido: apellidoVal,
+        email: emailVal,
+        descripcion: mensajeVal
       };
+      
+      function showStatus(msg, type) {
+        if (statusMessage) {
+          statusMessage.textContent = msg;
+          statusMessage.className = `form-status ${type}`;
+        }
+      }
       
       const originalText = submitBtn.innerHTML;
       submitBtn.disabled = true;
@@ -1625,22 +1698,29 @@
         statusMessage.textContent = '';
       }
       
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+      
       const resultado = await sendEmail(datos);
       
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
       
-      if (statusMessage) {
-        if (resultado.success) {
-          statusMessage.className = 'form-status success';
-          statusMessage.textContent = resultado.message;
-          form.reset();
-        } else {
-          statusMessage.className = 'form-status error';
-          statusMessage.textContent = resultado.message;
-        }
+      if (resultado.success) {
+        showStatus(resultado.message, 'success');
+        form.reset();
+      } else {
+        showStatus(resultado.message, 'error');
       }
       return resultado;
+    }
+    
+    function showStatus(msg, type) {
+      if (document.getElementById('formStatus')) {
+        document.getElementById('formStatus').textContent = msg;
+        document.getElementById('formStatus').className = `form-status ${type}`;
+      }
     }
     
     window.handleSubmit = handleSubmit;
