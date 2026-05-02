@@ -763,13 +763,22 @@
     .cv-chip i { color: var(--accent3); font-size: 0.9rem; }
 
     /* Form */
-    .contact-card {
+.contact-card {
       background: var(--card);
       backdrop-filter: blur(8px);
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 3rem;
       transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    @media (max-width: 480px) {
+      .contact-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+      }
+      .contact-card h3 {
+        font-size: 1.4rem;
+      }
     }
     .contact-card:hover {
       border-color: rgba(124,111,255,0.35);
@@ -997,7 +1006,7 @@
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
       body { overflow-x: visible; max-width: 100vw; }
       .cursor-glow { display: none; }
       nav { position: fixed; overflow: visible; width: 100%; max-width: 100%; left: 0; right: 0; }
@@ -1037,6 +1046,13 @@
       .contact-card { padding: 1.75rem; }
       .orb-1, .orb-2, .orb-3 { filter: blur(60px); opacity: 0.35; }
       .marquee-item { font-size: 1.1rem; }
+    }
+
+    @media (max-width: 480px) {
+      #contacto .container { padding: 0 1rem; }
+      #contacto h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+      #contacto p { font-size: 0.95rem; }
+      .form-input { font-size: 16px; padding: 0.875rem 1rem; }
     }
 
     @media (min-width: 769px) {
@@ -1118,7 +1134,7 @@
       <div class="fade-in-up" style="text-align: center; animation-delay: 0.15s;">
         <div class="profile-wrap">
           <div class="profile-img">
-            <img src="/images/FotoYess.jpeg" alt="Yessid Cordero">
+            <img src="images/FotoYess.jpeg" alt="Yessid Cordero">
           </div>
           <div class="floating-badge badge-top"><i class="fas fa-bolt"></i> Backend</div>
           <div class="floating-badge badge-bottom"><i class="fas fa-rocket"></i> Frontend</div>
@@ -1514,10 +1530,25 @@
             </div>
           </div>
 <form id="contactForm" style="display: flex; flex-direction: column; gap: 1.5rem;" onsubmit="handleSubmit(event)">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <input type="text" id="contactName" placeholder="Nombre" class="form-input" required>
               <input type="text" id="contactApellido" placeholder="Apellido" class="form-input" required>
             </div>
+            <style>
+            @media (max-width: 480px) {
+              #contactForm > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+              }
+              #contactForm .form-input {
+                padding: 0.875rem;
+                font-size: 16px; /* Prevent zoom on iOS */
+              }
+              #contactForm textarea {
+                min-height: 100px;
+              }
+            }
+            </style>
             <input type="email" id="contactEmail" placeholder="Tu correo electrónico" class="form-input" required>
             <textarea id="contactMensaje" placeholder="Descripción del trabajo o proyecto..." rows="4" class="form-input" style="resize: vertical;" required></textarea>
             <div id="formStatus" class="form-status"></div>
